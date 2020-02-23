@@ -1,0 +1,52 @@
+package Proxiad;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class Collections {
+
+	public static void main(String[] args) {
+
+		List<Integer> list = Arrays.asList(1, 4, 6, 7, 6, 1, 6);
+		Map<Integer, Integer> frequencyMap = new HashMap<>();
+		for (Integer i : list) {
+			Integer count = frequencyMap.get(i);
+			if (count == null)
+				count = 0;
+			frequencyMap.put(i, count + 1);
+		}
+		List<Integer> distinctList = (List<Integer>) list.stream().distinct().collect(Collectors.toList());
+		System.out.println("Без повтарящи се числа: " + distinctList);
+		List<Integer> alone = new ArrayList<Integer>();
+		List<Integer> notAlone = new ArrayList<Integer>();
+//		frequencyMap.forEach((k, v) -> System.out.println("Number : " + k + " Count : " + v));
+
+		
+		
+		for (Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+			if (entry.getValue().equals(1)) {
+				alone.add(entry.getKey());
+			} else {
+				notAlone.add(entry.getKey());
+			}
+
+		}
+		System.out.print(alone.size() + "по един път:");
+		for (int i = 0; i < alone.size(); i++) {
+			System.out.print(" " + alone.get(i));
+		}
+		System.out.println("");
+		System.out.print(notAlone.size() + "повече от един път:");
+		for (int i = 0; i < notAlone.size(); i++) {
+			System.out.print(" " + notAlone.get(i));
+		}
+
+	}
+}
